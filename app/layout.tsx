@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Inter } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import "./globals.css"
 import Header from "@/components/Header"
 import Sidebar from "@/components/Sidebar"
@@ -9,7 +9,7 @@ import 'leaflet/dist/leaflet.css'
 import { Toaster } from 'react-hot-toast'
 import { getAvailableRewards, getUserByEmail } from '@/utils/db/actions'
 
-const inter = Inter({ subsets: ['latin'] })
+const poppins = Poppins({subsets: ['latin'], weight: ['100', '200', '300', '400', '500', '500', '600', '700', '800', '900']});
 
 export default function RootLayout({
   children,
@@ -28,6 +28,7 @@ export default function RootLayout({
           console.log('user from layout', user);
           
           if (user) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const availableRewards = await getAvailableRewards(user.id) as any
             console.log('availableRewards from layout', availableRewards);
                         setTotalEarnings(availableRewards)
@@ -43,7 +44,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={poppins.className }>
         <div className="min-h-screen bg-gray-50 flex flex-col">
           <Header onMenuClick={() => setSidebarOpen(!sidebarOpen)} totalEarnings={totalEarnings} />
           <div className="flex flex-1">
